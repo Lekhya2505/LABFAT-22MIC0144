@@ -3,7 +3,7 @@ name: Generate Table of Contents for Documentation
 on:
   push:
     branches:
-      - '**' # Triggers on push to any branch
+      - '**'
 
 jobs:
   generate-toc:
@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3 # Checks out the repository so the workflow can access the files
+        uses: actions/checkout@v3 
 
       - name: Generate Table of Contents
-        uses: actions/markdown-toc@v2 # Action to generate TOC
+        uses: actions/markdown-toc@v2 
         with:
-          file_glob: '**/*.md' # Process all Markdown files in the repository
+          file_glob: '**/*.md' 
 
       - name: Commit and Push Changes
         run: |
