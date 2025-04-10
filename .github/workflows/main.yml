@@ -3,7 +3,10 @@ name: Generate TOC for Documentation
 'on':
   push:
     branches:
-      - '**' 
+      - '**'
+
+permissions:
+  contents: write
 
 jobs:
   generate-toc:
@@ -11,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -23,9 +25,12 @@ jobs:
             *.md
 
       - name: Commit and Push changes
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git
           git add .
           git commit -m "Update TOC in Markdown files" || echo "No changes to commit"
           git push
