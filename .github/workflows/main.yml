@@ -1,6 +1,6 @@
 name: Generate TOC for Documentation
 
-on:
+'on':
   push:
     branches:
       - '**' 
